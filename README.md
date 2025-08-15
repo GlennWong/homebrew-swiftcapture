@@ -68,6 +68,7 @@ SwiftCapture requires Screen Recording permission to function:
 ### 标准发布流程
 
 1. **更新主项目版本号**
+
    ```bash
    # 在主项目中更新以下文件的版本号：
    # - release-config.json
@@ -76,12 +77,14 @@ SwiftCapture requires Screen Recording permission to function:
    ```
 
 2. **构建并测试**
+
    ```bash
    swift build --disable-sandbox -c release
    ./.build/release/SwiftCapture --version  # 验证版本号
    ```
 
 3. **提交并创建标签**
+
    ```bash
    git add .
    git commit -m "Bump version to vX.X.X"
@@ -91,12 +94,14 @@ SwiftCapture requires Screen Recording permission to function:
    ```
 
 4. **获取新版本的 SHA256**
+
    ```bash
    # 等待 GitHub 处理新标签后
    curl -sL https://github.com/GlennWong/SwiftCapture/archive/vX.X.X.tar.gz | shasum -a 256
    ```
 
 5. **更新 Homebrew Formula**
+
    ```bash
    # 在 homebrew-tap 仓库中更新 Formula/swiftcapture.rb：
    # - url: 更新到新版本的 tar.gz 链接
@@ -104,6 +109,7 @@ SwiftCapture requires Screen Recording permission to function:
    ```
 
 6. **提交并推送 Formula 更新**
+
    ```bash
    cd homebrew-tap
    git add Formula/swiftcapture.rb
