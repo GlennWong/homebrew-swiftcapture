@@ -1,4 +1,3 @@
-
 # 自动化发布设置指南
 
 ## 🚀 一键发布流程
@@ -110,3 +109,65 @@
 2. 创建 GitHub Release
 3. 等待自动化完成！
 ```
+
+## 问题说明
+
+之前遇到的版本不匹配问题是因为：
+
+1. 在 GitHub 创建 Release 时，tag 指向的代码中版本号还是旧的
+2. GitHub Actions 在 Release 发布后才更新版本号，但 tag 已经创建
+
+## 解决方案
+
+现在提供两种发布方式：
+
+### 方式一：自动化预发布（推荐）
+
+使用 GitHub Actions 的 `prepare-release.yml` 工作流程：
+
+1. 在 GitHub 仓库页面，点击 "Actions" 标签
+2. 选择 "Prepare Release" 工作流程
+3. 点击 "Run workflow"
+4. 输入新版本号（如 `2.1.6`）
+5. 点击 "Run workflow" 按钮
+
+这个工作流程会：
+
+- 自动更新所有源文件中的版本号
+- 创建正确的 git tag
+- 自动创建 GitHub Release
+- 确保 tag 指向包含正确版本号的代码
+
+### 方式二：手动创建 Release（已修复）
+
+如果你仍然想手动创建 Release：
+
+1. 现有的 `release.yml` 工作流程已经修复
+2. 它会检测版本不匹配并自动修复
+3. 会重新创建正确的 tag
+
+## 验证步骤
+
+发布后验证版本是否正确：
+
+```bash
+# 检查 tag 指向的版本号
+git show v2.1.6:Sources/SwiftCapture/CLI/SwiftCaptureCommand.swift | grep "version:"
+
+# 应该显示：
+# version: "2.1.6",
+```
+
+## Homebrew 更新
+
+两种方式都会自动：
+
+1. 计算新的 SHA256
+2. 更新 Homebrew formula
+3. 推送到 homebrew-swiftcapture 仓库
+
+## 建议
+
+- **推荐使用方式一**：更可靠，避免时序问题
+- 方式二作为备用方案，已经加入了自动修复机制
+- 每次发布后都要验证版本号是否正确
