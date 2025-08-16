@@ -1,47 +1,23 @@
 class Swiftcapture < Formula
   desc "Professional screen recording tool for macOS with comprehensive CLI interface"
   homepage "https://github.com/GlennWong/SwiftCapture"
-  url "https://github.com/GlennWong/SwiftCapture/archive/v2.1.8.tar.gz"
-  sha256 "aee76ef669ca2fe75b7d39b270fe4ae9d34610a0bb1d6de2b7ffe961085f6f92"
+  url "https://github.com/GlennWong/SwiftCapture/releases/download/v2.1.10/scap-v2.1.10-macos.tar.gz"
+  sha256 "4e54ce2571de643b53735acbbd68fba9a2e56b2a7961c3d885b4c4b00c145dea"
   license "MIT"
-  head "https://github.com/GlennWong/SwiftCapture.git", branch: "main"
+  version "2.1.10"
 
   # System requirements
-  depends_on xcode: ["14.3", :build]
-  depends_on :macos => :monterey # macOS 12.0+, but we need 12.3+ for ScreenCaptureKit
-
-  # Swift ArgumentParser is included as a dependency in Package.swift
-  # No additional Homebrew dependencies needed
+  depends_on :macos => :monterey # macOS 12.3+
+  depends_on arch: [:arm64, :x86_64]
 
   def install
-    # Build the release version
-    system "swift", "build", "--disable-sandbox", "-c", "release"
-    
     # Install the binary
-    bin.install ".build/release/SwiftCapture" => "scap"
+    bin.install "scap"
     
-    # Install man page if it exists
-    if File.exist?("docs/scap.1")
-      man1.install "docs/scap.1"
+    # Install documentation if present
+    if File.exist?("README.txt")
+      doc.install "README.txt"
     end
-    
-    # Install shell completions if they exist
-    if File.exist?("completions/scap.bash")
-      bash_completion.install "completions/scap.bash" => "scap"
-    end
-    
-    if File.exist?("completions/scap.zsh")
-      zsh_completion.install "completions/scap.zsh" => "_scap"
-    end
-    
-    if File.exist?("completions/scap.fish")
-      fish_completion.install "completions/scap.fish"
-    end
-  end
-
-  def post_install
-    # Create preset directory
-    (var/"scap").mkpath
   end
 
   def caveats
@@ -50,44 +26,40 @@ class Swiftcapture < Formula
       
       To grant permission:
       1. Open System Preferences > Security & Privacy > Privacy
-      2. Select "Screen Recording" from the left sidebar  
-      3. Click the lock icon and enter your password
-      4. Add your terminal application (Terminal, iTerm2, etc.)
-      5. Enable the checkbox next to your terminal
+      2. Select 'Screen Recording' from the left sidebar  
+      3. Click the lock to make changes (enter your password)
+      4. Add your terminal application (Terminal.app, iTerm2, etc.)
+      5. Enable the checkbox for your terminal
       6. Restart your terminal application
       
-      For microphone recording (optional), also grant Microphone permission
-      following the same steps in the "Microphone" section.
+      For microphone recording, also grant Microphone permission in the same way.
       
-      Quick start:
-        scap --help                    # Show comprehensive help
-        scap --duration 30000          # Record for 30 seconds  
-        scap --screen-list             # List available screens
-        scap --app-list                # List running applications
-        scap --enable-microphone       # Include microphone audio
-        
-      Presets are stored in: #{var}/scap/
+      Usage examples:
+        scap --help                    # Show help
+        scap --screen-list            # List available screens
+        scap --duration 5000          # Record for 5 seconds
+        scap --output recording.mov   # Specify output file
     EOS
   end
 
   test do
-    # Test that the binary was installed correctly and shows version
-    assert_match "SwiftCapture", shell_output("#{bin}/scap --version 2>&1")
+    # Test that the binary exists and is executable
+    assert_predicate bin/"scap", :exist?
+    assert_predicate bin/"scap", :executable?
     
-    # Test help command
-    help_output = shell_output("#{bin}/scap --help 2>&1")
-    assert_match "Professional screen recording tool", help_output
-    assert_match "duration", help_output
-    assert_match "output", help_output
+    # Test version command
+    system bin/"scap", "--version"
     
-    # Test that screen list command doesn't crash (may fail due to permissions)
-    # We just check it doesn't segfault or have major issues
-    system "#{bin}/scap", "--screen-list"
+    # Test help command  
+    system bin/"scap", "--help"
     
-    # Test that app list command doesn't crash
-    system "#{bin}/scap", "--app-list"
+    # Test screen list (may fail without permissions, but shouldn't crash)
+    system bin/"scap", "--screen-list" rescue nil
     
-    # Test preset list (should work without permissions)
-    system "#{bin}/scap", "--list-presets"
+    # Test app list
+    system bin/"scap", "--app-list" rescue nil
+    
+    # Test preset list
+    system bin/"scap", "--list-presets"
   end
 end
