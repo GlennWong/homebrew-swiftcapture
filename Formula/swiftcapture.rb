@@ -1,10 +1,10 @@
 class Swiftcapture < Formula
   desc "Professional screen recording tool for macOS with comprehensive CLI interface"
   homepage "https://github.com/GlennWong/SwiftCapture"
-  url "https://github.com/GlennWong/SwiftCapture/releases/download/v2.1.11/scap-v2.1.11-macos.tar.gz"
-  sha256 "cc935e910d8a1efe4c8c9815ce813975de47e7abe89da7c5cb98932597b71979"
+  url "https://github.com/GlennWong/SwiftCapture/releases/download/v2.1.12/scap-v2.1.12-macos.tar.gz"
+  sha256 "cbfa5a289a51bd4b91ad0172d3aff7ff0f1389fa1a8332f272857868d71eb2f5"
   license "MIT"
-  version "2.1.11"
+  version "2.1.12"
 
   # System requirements
   depends_on :macos => :monterey # macOS 12.3+
