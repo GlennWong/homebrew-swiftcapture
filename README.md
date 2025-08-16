@@ -151,6 +151,91 @@ brew bump-formula-pr --url=https://github.com/GlennWong/SwiftCapture/archive/vX.
 
 按照 Homebrew 最佳实践，tap 应该是独立的仓库，不应该作为子目录放在主项目中。
 
+## 要求检查清单
+
+### ✅ 已满足的要求：
+
+- [x] 开源项目（MIT 许可证）
+- [x] 稳定的版本标签（v2.0.0）
+- [x] 可构建的源代码
+- [x] 适当的文档
+
+### 🔄 需要完善的要求：
+
+#### 1. 项目成熟度
+
+- [ ] 至少 30 个 GitHub stars
+- [ ] 活跃的维护（定期提交）
+- [ ] 用户反馈和 issue 处理
+
+#### 2. 包质量
+
+- [ ] 全面的测试覆盖
+- [ ] CI/CD 流水线
+- [ ] 详细的文档
+
+#### 3. Homebrew 特定要求
+
+- [ ] Formula 必须构建成功
+- [ ] 通过所有 Homebrew 测试
+- [ ] 遵循 Homebrew 命名约定
+
+## 提交步骤
+
+### 当前推荐：创建自己的 Tap
+
+1. **创建 GitHub 仓库**：
+
+   ```bash
+   # 仓库名必须是: homebrew-<name>
+   # 例如: homebrew-swiftcapture
+   ```
+
+2. **用户安装方式**：
+   ```bash
+   brew tap GlennWong/swiftcapture
+   brew install swiftcapture
+   ```
+
+### 未来：提交到 Homebrew Core
+
+当项目更成熟时：
+
+1. **Fork Homebrew Core**：
+
+   ```bash
+   git clone https://github.com/Homebrew/homebrew-core.git
+   cd homebrew-core
+   ```
+
+2. **添加 Formula**：
+
+   ```bash
+   cp path/to/swiftcapture.rb Formula/
+   ```
+
+3. **测试 Formula**：
+
+   ```bash
+   brew install --build-from-source Formula/swiftcapture.rb
+   brew test swiftcapture
+   brew audit --strict swiftcapture
+   ```
+
+4. **提交 PR**：
+   - 创建分支
+   - 提交 Formula
+   - 创建 Pull Request 到 homebrew-core
+
+## 当前行动计划
+
+1. ✅ 完善项目文档
+2. ✅ 添加更多测试
+3. ✅ 设置 GitHub Actions CI
+4. 🔄 推广项目获得更多用户
+5. 🔄 收集用户反馈
+6. 🔄 当达到要求时提交到 Homebrew Core
+
 ## License
 
 MIT License - see the main repository for details.
