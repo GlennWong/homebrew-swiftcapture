@@ -39,6 +39,7 @@
 
 3. **验证安装**
    ```bash
+   gh release create v2.1.9 --title "v2.1.9" --notes "built binary"
    brew uninstall swiftcapture
    brew untap GlennWong/swiftcapture
    brew tap GlennWong/swiftcapture
