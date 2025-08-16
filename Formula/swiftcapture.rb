@@ -1,8 +1,8 @@
 class Swiftcapture < Formula
   desc "Professional screen recording tool for macOS with comprehensive CLI interface"
   homepage "https://github.com/GlennWong/SwiftCapture"
-  url "https://github.com/GlennWong/SwiftCapture/archive/v2.1.6.tar.gz"
-  sha256 "52da153b4e110f79453641358db9eadbc2b5b18982eb3e9f6620109f334d5656"
+  url "https://github.com/GlennWong/SwiftCapture/archive/v2.1.8.tar.gz"
+  sha256 "aee76ef669ca2fe75b7d39b270fe4ae9d34610a0bb1d6de2b7ffe961085f6f92"
   license "MIT"
   head "https://github.com/GlennWong/SwiftCapture.git", branch: "main"
 
