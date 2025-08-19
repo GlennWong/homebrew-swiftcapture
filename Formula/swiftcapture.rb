@@ -1,12 +1,12 @@
 class Swiftcapture < Formula
-  desc "Professional screen recording tool for macOS with comprehensive CLI interface"
+  desc "Professional screen recording tool for macOS with comprehensive CLI interface (Universal Binary)"
   homepage "https://github.com/GlennWong/SwiftCapture"
-  url "https://github.com/GlennWong/SwiftCapture/releases/download/v2.1.15/scap-v2.1.15-macos.tar.gz"
-  sha256 "cfb2e59d2c34597c0f389c9c7a22887da643d866b7dc53ca6c94ef0d98ea9a5c"
+  url "https://github.com/GlennWong/SwiftCapture/releases/download/v2.1.16/scap-v2.1.16-macos.tar.gz"
+  sha256 "a9ea1488597a517caf5156a75f6c769d39daa3093e5548920759ac785f866dec"
   license "MIT"
-  version "2.1.15"
+  version "2.1.16"
 
-  # System requirements
+  # System requirements - Universal Binary supports both Intel and Apple Silicon
   depends_on :macos => :monterey # macOS 12.3+
   depends_on arch: [:arm64, :x86_64]
 
