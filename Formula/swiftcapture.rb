@@ -1,10 +1,10 @@
 class Swiftcapture < Formula
   desc "Professional screen recording tool for macOS with comprehensive CLI interface (Universal Binary)"
   homepage "https://github.com/GlennWong/SwiftCapture"
-  url "https://github.com/GlennWong/SwiftCapture/releases/download/v2.2.1/scap-v2.2.1-macos.tar.gz"
-  sha256 "a8701c21cb9606516d1b27971b341d4cea9a61f34abea92af12690b20c992d80"
+  url "https://github.com/GlennWong/SwiftCapture/releases/download/v2.2.2/scap-v2.2.2-macos.tar.gz"
+  sha256 "a2508c6379c1ddaf1413c8545e40b4763a55791f13bd5722849f9e17a41a37f9"
   license "MIT"
-  version "2.2.1"
+  version "2.2.2"
 
   # System requirements - Universal Binary supports both Intel and Apple Silicon
   depends_on :macos => :monterey # macOS 12.3+
@@ -34,10 +34,10 @@ class Swiftcapture < Formula
       For microphone recording, also grant Microphone permission in the same way.
       
       Usage examples:
-        scap --help                    # Show help
-        scap --screen-list            # List available screens
-        scap --duration 5000          # Record for 5 seconds
-        scap --output recording.mov   # Specify output file
+        scap --help                     # Show help
+        scap --screen-list              # List available screens
+        scap --duration 5000            # Record for 5 seconds
+        scap --output recording.mov     # Specify output file
     EOS
   end
 
