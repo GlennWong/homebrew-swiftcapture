@@ -39,12 +39,13 @@
 
 3. **验证安装**
    ```bash
-   gh release create v2.1.9 --title "v2.1.9" --notes "built binary"
+   gh release create v2.2.4 --title "v2.2.4" --notes "add double confirm for recording with duration to quit early"
    brew uninstall swiftcapture
    brew untap GlennWong/swiftcapture
    brew tap GlennWong/swiftcapture
    brew install swiftcapture
    scap --version
+   scap
    ```
 
 ### GitHub Actions 工作流
