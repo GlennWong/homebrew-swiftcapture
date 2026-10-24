@@ -39,7 +39,7 @@
 
 3. **验证安装**
    ```bash
-   gh release create v2.2.4 --title "v2.2.4" --notes "add double confirm for recording with duration to quit early"
+   gh release create v2.2.5 --title "v2.2.5" --notes "fix warnings and remove the displayID from output"
    brew uninstall swiftcapture
    brew untap GlennWong/swiftcapture
    brew tap GlennWong/swiftcapture
